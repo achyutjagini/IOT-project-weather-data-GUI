@@ -1,0 +1,48 @@
+from tensorflow.keras.models import load_model
+
+
+# Convert 'Measurement Timestamp' into a datetime object
+data['Measurement Timestamp'] = pd.to_datetime(
+data['Measurement Timestamp'].copy(), format='%m/%d/%Y %I:%M:%S %p')
+
+# Extracting time-related features
+data['Year'] = data['Measurement Timestamp'].dt.year
+data['Month'] = data['Measurement Timestamp'].dt.month
+data['Day'] = data['Measurement Timestamp'].dt.day
+data['Hour'] = data['Measurement Timestamp'].dt.hour
+data['Minute'] = data['Measurement Timestamp'].dt.minute
+
+# Dropping unnecessary columns
+data_processed = data.drop(['Station Name', 'Measurement Timestamp', 
+    'Measurement Timestamp Label', 'Measurement ID'], axis=1)
+
+# Normalizing the data
+scaler = MinMaxScaler(feature_range=(0, 1))
+data_normalized = scaler.fit_transform(data_processed)
+
+# Function to create sequences
+def create_sequences(data, n_steps, target_index):
+    X, y = [], []
+    for i in range(len(data) - n_steps):
+        X.append(data[i:i + n_steps, :])
+        y.append(data[i + n_steps, target_index])
+    return np.array(X), np.array(y)
+
+# Number of time steps in each input sequence
+n_steps = 5
+target_index = data_processed.columns.get_loc("Air Temperature")
+
+# Create sequences
+X, y = create_sequences(data_normalized, n_steps, target_index)
+
+# Splitting the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
+
+# Print the shapes of the datasets
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# Load the model from the H5 file
+loaded_model = load_model('lstm_beach.h5')
+
+predictions = loaded_model.predict(X_test)
+
