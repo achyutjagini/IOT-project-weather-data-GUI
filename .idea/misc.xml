@@ -5,4 +5,7 @@
     <option name="sdkUUID" value="60ad3aef-9a8f-4dd2-9173-8bb79f976768" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11" project-jdk-type="Python SDK" />
+  <component name="PyPackaging">
+    <option name="earlyReleasesAsUpgrades" value="true" />
+  </component>
 </project>
