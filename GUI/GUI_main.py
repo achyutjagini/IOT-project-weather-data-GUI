@@ -51,15 +51,15 @@ class MainUi(QtWidgets.QMainWindow):
         self.left_label_3 = QtWidgets.QPushButton("contact for helps")
         self.left_label_3.setObjectName('left_label')
 
-        self.left_button_1 = QtWidgets.QPushButton(qtawesome.icon('fa.music', color='white'), "Historical data")
+        self.left_button_1 = QtWidgets.QPushButton(qtawesome.icon('fa.database', color='white'), "Historical data")
         self.left_button_1.setObjectName('left_button')
-        self.left_button_2 = QtWidgets.QPushButton(qtawesome.icon('fa.sellsy', color='white'), "Weather analysis")
+        self.left_button_2 = QtWidgets.QPushButton(qtawesome.icon('fa.cloud', color='white'), "Weather analysis")
         self.left_button_2.setObjectName('left_button')
-        self.left_button_3 = QtWidgets.QPushButton(qtawesome.icon('fa.film', color='white'), "Local map")
+        self.left_button_3 = QtWidgets.QPushButton(qtawesome.icon('fa.map', color='white'), "Local map")
         self.left_button_3.setObjectName('left_button')
-        self.left_button_4 = QtWidgets.QPushButton(qtawesome.icon('fa.home', color='white'), "Follow US")
+        self.left_button_4 = QtWidgets.QPushButton(qtawesome.icon('fa.headphones', color='white'), "Follow US")
         self.left_button_4.setObjectName('left_button')
-        self.left_button_5 = QtWidgets.QPushButton(qtawesome.icon('fa.download', color='white'), "Report BUGs")
+        self.left_button_5 = QtWidgets.QPushButton(qtawesome.icon('fa.phone', color='white'), "Report BUGs")
         self.left_button_5.setObjectName('left_button')
 
 
