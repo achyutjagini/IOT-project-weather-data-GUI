@@ -48,7 +48,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.left_label_1.setObjectName('left_label')
         self.left_label_2 = QtWidgets.QPushButton("App functions")
         self.left_label_2.setObjectName('left_label')
-        self.left_label_3 = QtWidgets.QPushButton("contact for helps")
+        self.left_label_3 = QtWidgets.QPushButton("@Yihang")
         self.left_label_3.setObjectName('left_label')
 
         self.left_button_1 = QtWidgets.QPushButton(qtawesome.icon('fa.database', color='white'), "Historical data")
@@ -72,8 +72,8 @@ class MainUi(QtWidgets.QMainWindow):
         self.left_layout.addWidget(self.left_button_2, 4, 0, 1, 3)
         self.left_layout.addWidget(self.left_button_3, 5, 0, 1, 3)
         self.left_layout.addWidget(self.left_button_4, 6, 0, 1, 3)
-        self.left_layout.addWidget(self.left_button_5, 7, 0, 1, 3)
-        self.left_layout.addWidget(self.left_label_3, 9, 0, 1, 3)
+        self.left_layout.addWidget(self.left_button_5, 8, 0, 1, 3)
+        self.left_layout.addWidget(self.left_label_3, 7, 0, 1, 3)
 
         ##button for hostorical data
         self.right_recommend_label = QtWidgets.QLabel("historical data")
@@ -234,6 +234,11 @@ class MainUi(QtWidgets.QMainWindow):
         self.setWindowOpacity(0.9)  # set transparent
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent
 
+
+        #quit function
+        self.left_close.clicked.connect(lambda: self.__exit__(1))
+
+
     def update_news(self, button_number):
         # use gnewsclient get news
         client = gnewsclient.NewsClient(language='swedish', location='Sweden', topic='World', max_results=5)
@@ -255,6 +260,10 @@ class MainUi(QtWidgets.QMainWindow):
             for i in range(2, 6):
                 self.update_news(i)
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.exit(self.exec_())
+
+    
 
     def open_link(self, button_number):
         # use gnewsclient news
