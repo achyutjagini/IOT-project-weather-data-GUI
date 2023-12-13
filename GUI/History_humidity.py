@@ -1,8 +1,13 @@
 from PyQt5 import QtCore,QtGui,QtWidgets
 import sys
 import qtawesome
+import os
+from PyQt5.QtWebKitWidgets import QGraphicsWebView
+from PyQt5.QtWidgets import QWidget
 from gnewsclient import gnewsclient
 import webbrowser
+import hum_draw
+from plotly.offline import plot
 
 class MainUi(QtWidgets.QMainWindow):
 
@@ -68,17 +73,23 @@ class MainUi(QtWidgets.QMainWindow):
         self.draw_widget = QtWidgets.QWidget()
         self.draw_widget.setObjectName("right_widget2")
         self.draw_layout = QtWidgets.QGridLayout()
-        self.draw_layout.setObjectName("draw_layout")
+        self.draw_widget.setLayout(self.draw_layout)
 
         self.humidity_label = QtWidgets.QPushButton("Show hitorical")
         self.humidity_label.setObjectName('right_label')
 
-        # self.humidity_show = QtWidgets.
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        html_file_path = os.path.join(current_dir, 'humidity_plot.html')
+        self.web_view = QGraphicsWebView()
+        self.web_view.setObjectName('plotshow')
+        self.web_view.setHtml(html_file_path)
+        self.web_view_container = QWidget.createWindowContainer(self.web_view)
 
 
         self.right_layout.addWidget(self.draw_widget,1,2,11,10)
         self.right_layout.addWidget(self.humidity_label,0,2,1,1)
-
+        self.draw_layout.addWidget(self.web_view_container,1,2,11,10)
+        ##  QSS
         self.left_close.setFixedSize(30, 30)  # set size
         self.left_visit.setFixedSize(30, 30)  # set size
         self.left_mini.setFixedSize(30, 30)  # set size
@@ -101,6 +112,9 @@ class MainUi(QtWidgets.QMainWindow):
                     }
                     QPushButton#left_button:hover{border-left:4px solid red;font-weight:700;}
                 ''')
+
+
+
 
 def main():
             app = QtWidgets.QApplication(sys.argv)
