@@ -245,7 +245,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.left_button_3.clicked.connect(lambda:self.open_map())
 
         ##Historical
-        # self.recommend_button_1.clicked.connect(lambda:self.open_humidity())
+        self.recommend_button_1.clicked.connect(lambda:self.open_humidity())
 
 
 
@@ -273,6 +273,10 @@ class MainUi(QtWidgets.QMainWindow):
     def __exit__(self, exc_type, exc_val, exc_tb):
         sys.exit(self.exec_())
 
+    def open_humidity(self):
+        import hum_draw
+        print("1")
+
     
 
     def open_link(self, button_number):
@@ -287,14 +291,10 @@ class MainUi(QtWidgets.QMainWindow):
         link_text = news_list[button_number - 1]['link']
         webbrowser.open(link_text)
 
-    def open_map(self):
-        # self.map_w = map.MapWindow()
-        # self.map_w.show()
+    # def open_map(self):
+    #     # self.map_w = map.MapWindow()
+    #     # self.map_w.show()
 
-
-     def open_humidity(self):
-        import History_humidity
-        # hum_draw.draw()
 def main():
     app = QtWidgets.QApplication(sys.argv)
     gui = MainUi()
